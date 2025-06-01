@@ -7,21 +7,21 @@ import Modal from "react-native-modal";
 import styles from "./Diyetlerim.style";
 import app from "../../../../firebase.config";
 import FloatingButton from "../../../components/FloatingButton/FloatingButton";
-import { MenuModal } from "../../../components/modal/MenuModal/MenuModal";
+import { CreateModal } from "../../../components/modal/CreateModal/CreateModal";
 
 const Diyetlerim = ({ navigation }) => {
-  const [roomList, setRoomList] = useState([]);
+  const [dietList, setDietList] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const auth = getAuth(app);
   const db = getDatabase(app);
-  const rooms = ref(db, "diyetlerim/");
+  const diets = ref(db, `diyetlerim/${auth.currentUser.uid}`);
   useEffect(() => {
-    onValue(rooms, (snapshot) => {
+    onValue(diets, (snapshot) => {
       const data = snapshot.val();
-      setRoomList(data);
+      setDietList(data);
     });
   }, []);
-  console.log(roomList);
+  console.log(dietList);
   return (
     <SafeAreaView style={styles.container}>
       <Text>{auth.currentUser.email.split("@", 1)}</Text>
@@ -31,7 +31,7 @@ const Diyetlerim = ({ navigation }) => {
           setModalVisible(!isModalVisible);
         }}
       />
-      <MenuModal
+      <CreateModal
         isVisible={isModalVisible}
         onClose={() => {
           setModalVisible(!isModalVisible);

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Modal from "react-native-modal";
 import { View, Text, TouchableOpacity } from "react-native";
-import { styles } from "./MenuModal.style";
+import { styles } from "./DietModal.style";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import colors from "../../../styles/colors";
 
-export const MenuModal = ({ isVisible, onClose }) => {
+export const DietModal = ({ isVisible, onClose }) => {
   return (
     <Modal
       isVisible={isVisible}
